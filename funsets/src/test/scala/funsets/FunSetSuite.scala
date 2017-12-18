@@ -144,6 +144,8 @@ class FunSetSuite extends FunSuite {
   test("map tests") {
     new TestSets {
       assert(map(s1, p => p + 1)(2), "Add 1")
+      assert(!map(s1, p => p + 1)(1), "Add 1")
+      assert(!map(s1, p => p + 1)(3), "Add 1")
     }
   }
 

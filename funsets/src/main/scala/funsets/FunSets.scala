@@ -60,7 +60,7 @@ object FunSets {
       else if (contains(s, a) && !p(a)) false
       else iter(a + 1)
     }
-    iter(0)
+    iter(-bound)
   }
   
   /**
@@ -75,8 +75,7 @@ object FunSets {
    * Returns a set transformed by applying `f` to each element of `s`.
    */
     def map(s: Set, f: Int => Int): Set = x => {
-      var y = f(x)
-      !exists(s, y => s(x) == s(y))
+      exists(s, y => f(y) == x)
     }
 
     /**
