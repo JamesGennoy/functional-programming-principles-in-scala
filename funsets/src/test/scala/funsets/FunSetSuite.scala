@@ -29,10 +29,10 @@ class FunSetSuite extends FunSuite {
   /**
    * Tests are written using the "test" operator and the "assert" method.
    */
-  // test("string take") {
-  //   val message = "hello, world"
-  //   assert(message.take(5) == "hello")
-  // }
+   test("string take") {
+     val message = "hello, world"
+     assert(message.take(5) == "hello")
+   }
 
   /**
    * For ScalaTest tests, there exists a special equality operator "===" that
@@ -43,9 +43,9 @@ class FunSetSuite extends FunSuite {
    * Try it out! Change the values so that the assertion fails, and look at the
    * error message.
    */
-  // test("adding ints") {
-  //   assert(1 + 2 === 3)
-  // }
+   test("adding ints") {
+     assert(1 + 2 === 3)
+   }
 
 
   import FunSets._
@@ -101,12 +101,49 @@ class FunSetSuite extends FunSuite {
     }
   }
 
+  test("singletonSet(1) not contains 2") {
+
+    /**
+      * We create a new instance of the "TestSets" trait, this gives us access
+      * to the values "s1" to "s3".
+      */
+    new TestSets {
+      /**
+        * The string argument of "assert" is a message that is printed in case
+        * the test fails. This helps identifying which assertion failed.
+        */
+      assert(!contains(s1, 2), "Singleton")
+    }
+  }
+
   test("union contains all elements of each set") {
     new TestSets {
       val s = union(s1, s2)
       assert(contains(s, 1), "Union 1")
       assert(contains(s, 2), "Union 2")
       assert(!contains(s, 3), "Union 3")
+    }
+  }
+
+  test("forall tests") {
+    new TestSets {
+      assert(forall(s1, p => p < 2), "Less than 2")
+      assert(forall(s2, p => p >= 2), "Greater than or equal to 2")
+      assert(!forall(s3, p => p == 1), "Not equal 1")
+    }
+  }
+
+  test("exists tests") {
+    new TestSets {
+      assert(exists(s1, p => p < 2), "Less than 2")
+      assert(exists(s2, p => p >= 2), "Greater than or equal to 2")
+      assert(!exists(s3, p => p == 1), "Not equal 1")
+    }
+  }
+
+  test("map tests") {
+    new TestSets {
+      assert(map(s1, p => p + 1)(2), "Add 1")
     }
   }
 
